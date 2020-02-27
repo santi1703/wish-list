@@ -48,6 +48,7 @@
 <script>
     export default {
         name: "GiftComponent",
+        props: ['baseurl'],
         data() {
             return {
                 gifts: [],
@@ -57,7 +58,7 @@
             }
         },
         created() {
-            axios.get('/wish-list/public/admin/gifts')
+            axios.get(this.baseurl + '/admin/gifts')
                 .then(res => {
                     this.gifts = res.data;
                 })
@@ -69,7 +70,7 @@
                     name: this.gift.name,
                     description: this.gift.description
                 };
-                axios.post('/wish-list/public/admin/gifts', params)
+                axios.post(this.baseurl + '/admin/gifts', params)
                     .then(res => {
                         this.disableButtons = false;
                         this.gifts.push(res.data);

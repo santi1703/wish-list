@@ -1957,6 +1957,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GiftComponent",
+  props: ['baseurl'],
   data: function data() {
     return {
       gifts: [],
@@ -1972,7 +1973,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get('/wish-list/public/admin/gifts').then(function (res) {
+    axios.get(this.baseurl + '/admin/gifts').then(function (res) {
       _this.gifts = res.data;
     });
   },
@@ -1985,7 +1986,7 @@ __webpack_require__.r(__webpack_exports__);
         name: this.gift.name,
         description: this.gift.description
       };
-      axios.post('/wish-list/public/admin/gifts', params).then(function (res) {
+      axios.post(this.baseurl + '/admin/gifts', params).then(function (res) {
         _this2.disableButtons = false;
 
         _this2.gifts.push(res.data);

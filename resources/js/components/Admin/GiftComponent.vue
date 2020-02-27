@@ -7,7 +7,8 @@
 
                 <form @submit.prevent="editItem(gift)" v-if="editing">
                     <input type="text" class="form-control" placeholder="Nombre" v-model="gift.name">
-                    <input type="text" class="form-control" placeholder="Descripcion" v-model="gift.description">
+                    <textarea rows="3" class="form-control" placeholder="Descripcion"
+                              v-model="gift.description"></textarea>
                     <a class="btn btn-secondary" @click="cancelEditForm" :disabled="disableButtons" type="button">Cancelar</a>
                     <button class="btn btn-warning" type="submit" :disabled="disableButtons || invalidItem()">Guardar
                     </button>
@@ -15,7 +16,8 @@
 
                 <form @submit.prevent="addItem" v-else>
                     <input type="text" class="form-control" placeholder="Nombre" v-model="gift.name">
-                    <input type="text" class="form-control" placeholder="Descripcion" v-model="gift.description">
+                    <textarea rows="3" class="form-control" placeholder="Descripcion"
+                              v-model="gift.description"></textarea>
                     <button class="btn btn-primary" type="submit" :disabled="disableButtons || invalidItem()">Agregar
                     </button>
                 </form>
@@ -24,13 +26,13 @@
                     <li class="list-group-item"
                         v-for="(item, index) in gifts" :key="index">
                         <p data-toggle="tooltip" :title="item.description">{{ item.name }}</p>
-                        <button class="btn btn-warning btn-sm float-right"
+                        <button class="btn btn-warning btn-sm float-right mr-1"
                                 data-toggle="tooltip"
                                 :title="getTooltip(item)"
                                 :disabled="item.user_id || disableButtons"
                                 @click="editForm(item)">Editar
                         </button>
-                        <button class="btn btn-danger btn-sm float-right"
+                        <button class="btn btn-danger btn-sm float-right mr-1"
                                 data-toggle="tooltip"
                                 :title="getTooltip(item)"
                                 :disabled="item.user_id || disableButtons"
@@ -115,7 +117,7 @@
             },
             getTooltip(item) {
                 if (item.user) {
-                    return "Asignado a " + item.user.name;
+                    return "Asignado a " + item.user.fullName;
                 } else {
                     return "";
                 }

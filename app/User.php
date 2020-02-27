@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'firstname', 'lastname', 'email', 'password',
     ];
 
     /**
@@ -36,4 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $appends = array('fullName');
+
+    public function gift()
+    {
+        return $this->hasOne('App\Models\Gift');
+    }
+
+    public function getFullNameAttribute()
+    {
+        return ucwords($this->firstname . ' ' . $this->lastname);
+    }
 }

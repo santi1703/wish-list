@@ -1953,6 +1953,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GiftComponent",
   data: function data() {
@@ -2042,7 +2044,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     getTooltip: function getTooltip(item) {
       if (item.user) {
-        return "Asignado a " + item.user.name;
+        return "Asignado a " + item.user.fullName;
       } else {
         return "";
       }
@@ -37497,7 +37499,7 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("input", {
+                _c("textarea", {
                   directives: [
                     {
                       name: "model",
@@ -37507,7 +37509,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "Descripcion" },
+                  attrs: { rows: "3", placeholder: "Descripcion" },
                   domProps: { value: _vm.gift.description },
                   on: {
                     input: function($event) {
@@ -37575,7 +37577,7 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("input", {
+                _c("textarea", {
                   directives: [
                     {
                       name: "model",
@@ -37585,7 +37587,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "Descripcion" },
+                  attrs: { rows: "3", placeholder: "Descripcion" },
                   domProps: { value: _vm.gift.description },
                   on: {
                     input: function($event) {
@@ -37627,7 +37629,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-warning btn-sm float-right",
+                  staticClass: "btn btn-warning btn-sm float-right mr-1",
                   attrs: {
                     "data-toggle": "tooltip",
                     title: _vm.getTooltip(item),
@@ -37645,7 +37647,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-danger btn-sm float-right",
+                  staticClass: "btn btn-danger btn-sm float-right mr-1",
                   attrs: {
                     "data-toggle": "tooltip",
                     title: _vm.getTooltip(item),

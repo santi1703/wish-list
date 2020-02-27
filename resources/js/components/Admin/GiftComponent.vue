@@ -81,7 +81,7 @@
             editItem(item, index) {
                 this.disableButtons = true;
                 const params = {name: item.name, description: item.description};
-                axios.put(`/wish-list/public/admin/gifts/${item.id}`, params)
+                axios.put(this.baseurl + `/admin/gifts/${item.id}`, params)
                     .then(res => {
                         this.disableButtons = false;
                         const index = this.gifts.findIndex(item => item.id === res.data.id);
@@ -109,7 +109,7 @@
             deleteItem(item, index) {
                 if (confirm('Estas seguro de borrar el regalo ' + item.name + '?')) {
                     this.disableButtons = true;
-                    axios.delete(`/wish-list/public/admin/gifts/${item.id}`)
+                    axios.delete(this.baseurl + `/admin/gifts/${item.id}`)
                         .then(() => {
                             this.disableButtons = false;
                             this.gifts.splice(index, 1);

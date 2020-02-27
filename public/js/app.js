@@ -2003,7 +2003,7 @@ __webpack_require__.r(__webpack_exports__);
         name: item.name,
         description: item.description
       };
-      axios.put("/wish-list/public/admin/gifts/".concat(item.id), params).then(function (res) {
+      axios.put(this.baseurl + "/admin/gifts/".concat(item.id), params).then(function (res) {
         _this3.disableButtons = false;
 
         var index = _this3.gifts.findIndex(function (item) {
@@ -2036,7 +2036,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (confirm('Estas seguro de borrar el regalo ' + item.name + '?')) {
         this.disableButtons = true;
-        axios["delete"]("/wish-list/public/admin/gifts/".concat(item.id)).then(function () {
+        axios["delete"](this.baseurl + "/admin/gifts/".concat(item.id)).then(function () {
           _this4.disableButtons = false;
 
           _this4.gifts.splice(index, 1);

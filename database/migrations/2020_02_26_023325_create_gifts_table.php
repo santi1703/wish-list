@@ -17,8 +17,8 @@ class CreateGiftsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('name');
-            $table->string('description');
+            $table->string('name', 200);
+            $table->text('description');
             $table->timestamps();
         });
 

@@ -1962,6 +1962,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GiftComponent",
   props: ['baseurl'],
@@ -37613,7 +37614,11 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control mt-1",
-                  attrs: { type: "text", placeholder: "Nombre" },
+                  attrs: {
+                    type: "text",
+                    placeholder: "Nombre",
+                    maxlength: "200"
+                  },
                   domProps: { value: _vm.gift.name },
                   on: {
                     input: function($event) {
@@ -37636,7 +37641,11 @@ var render = function() {
                   ],
                   staticClass: "form-control mt-1",
                   staticStyle: { resize: "none" },
-                  attrs: { rows: "3", placeholder: "Descripcion" },
+                  attrs: {
+                    rows: "3",
+                    placeholder: "Descripcion",
+                    maxlength: "500"
+                  },
                   domProps: { value: _vm.gift.description },
                   on: {
                     input: function($event) {
@@ -37692,7 +37701,11 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control mt-1",
-                  attrs: { type: "text", placeholder: "Nombre" },
+                  attrs: {
+                    type: "text",
+                    placeholder: "Nombre",
+                    maxlength: "200"
+                  },
                   domProps: { value: _vm.gift.name },
                   on: {
                     input: function($event) {
@@ -37715,7 +37728,11 @@ var render = function() {
                   ],
                   staticClass: "form-control mt-1",
                   staticStyle: { resize: "none" },
-                  attrs: { rows: "3", placeholder: "Descripcion" },
+                  attrs: {
+                    rows: "3",
+                    placeholder: "Descripcion",
+                    maxlength: "500"
+                  },
                   domProps: { value: _vm.gift.description },
                   on: {
                     input: function($event) {
@@ -37749,6 +37766,16 @@ var render = function() {
               _c("h3", [_vm._v(_vm._s(item.name))]),
               _vm._v(" "),
               _c("p", [_vm._v(_vm._s(item.description))]),
+              _vm._v(" "),
+              _c(
+                "span",
+                _vm._b(
+                  { staticClass: "badge badge-secondary" },
+                  "span",
+                  _vm.getTooltip(item),
+                  false
+                )
+              ),
               _vm._v(" "),
               _c(
                 "button",

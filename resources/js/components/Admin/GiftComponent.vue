@@ -6,18 +6,18 @@
             <div class="card-body">
 
                 <form @submit.prevent="editItem(gift)" v-if="editing">
-                    <input type="text" class="form-control mt-1" placeholder="Nombre" v-model="gift.name">
+                    <input type="text" class="form-control mt-1" placeholder="Nombre" v-model="gift.name" maxlength="200">
                     <textarea rows="3" class="form-control mt-1" placeholder="Descripcion"
-                              v-model="gift.description" style="resize: none;"></textarea>
+                              v-model="gift.description" style="resize: none;" maxlength="500"></textarea>
                     <a class="btn btn-secondary mt-1" @click="cancelEditForm" :disabled="disableButtons" type="button">Cancelar</a>
                     <button class="btn btn-warning mt-1" type="submit" :disabled="disableButtons || invalidItem()">Guardar
                     </button>
                 </form>
 
                 <form @submit.prevent="addItem" v-else>
-                    <input type="text" class="form-control mt-1" placeholder="Nombre" v-model="gift.name">
+                    <input type="text" class="form-control mt-1" placeholder="Nombre" v-model="gift.name"  maxlength="200">
                     <textarea rows="3" class="form-control mt-1" placeholder="Descripcion"
-                              v-model="gift.description" style="resize: none;"></textarea>
+                              v-model="gift.description" style="resize: none;"  maxlength="500"></textarea>
                     <button class="btn btn-primary mt-1" type="submit" :disabled="disableButtons || invalidItem()">Agregar
                     </button>
                 </form>
@@ -27,6 +27,7 @@
                         v-for="(item, index) in gifts" :key="index">
                         <h3>{{ item.name }}</h3>
                         <p>{{ item.description }}</p>
+                        <span class="badge badge-secondary" v-bind="getTooltip(item)"></span>
                         <button class="btn btn-warning btn-sm float-right mr-1"
                                 data-toggle="tooltip"
                                 :title="getTooltip(item)"

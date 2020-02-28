@@ -12,14 +12,4 @@ class Gift extends Model
     {
         return $this->belongsTo('App\User');
     }
-
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = strtolower($value);
-    }
-
-    public function setDescriptionAttribute($value)
-    {
-        $this->attributes['description'] = strtolower($value);
-    }
 }

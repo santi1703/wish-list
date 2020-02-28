@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password',
+        'firstname', 'lastname', 'password',
     ];
 
     /**
@@ -28,15 +28,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
     protected $appends = array('fullName');
 
     public function gift()
@@ -46,7 +37,7 @@ class User extends Authenticatable
 
     public function getFullNameAttribute()
     {
-        return ucwords($this->firstname . ' ' . $this->lastname);
+        return ucwords($this->first_name . ' ' . $this->last_name);
     }
 
     public function setFirstNameAttribute($value)

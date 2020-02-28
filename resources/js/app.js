@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('admin-gift-component', require('./components/Admin/GiftComponent.vue').default);
+Vue.component('admin-gift-list-component', require('./components/GiftListComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gift;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GiftController extends Controller
 {
@@ -30,7 +31,7 @@ class GiftController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +42,7 @@ class GiftController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Gift  $gift
+     * @param \App\Models\Gift $gift
      * @return \Illuminate\Http\Response
      */
     public function show(Gift $gift)
@@ -52,7 +53,7 @@ class GiftController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Gift  $gift
+     * @param \App\Models\Gift $gift
      * @return \Illuminate\Http\Response
      */
     public function edit(Gift $gift)
@@ -63,8 +64,8 @@ class GiftController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Gift  $gift
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Gift $gift
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -78,11 +79,25 @@ class GiftController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Gift  $gift
+     * @param \App\Models\Gift $gift
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         Gift::find($id)->delete();
+    }
+
+    public function assign(Request $request, $id)
+    {
+        $gift = Gift::find($id);
+        $gift->update(['user_id' => Auth::user()->id]);
+        return $gift;
+    }
+
+    public function unassign(Request $request, $id)
+    {
+        $gift = Gift::find($id);
+        $gift->update(['user_id' => null]);
+        return $gift;
     }
 }

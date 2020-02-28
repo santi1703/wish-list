@@ -11,17 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/', 'HomeController@index');
+    Route::get('/gifts', 'GiftController@index');
+    Route::post('/gifts/assign/{id}', 'GiftController@assign');
+    Route::post('/gifts/unassign/{id}', 'GiftController@unassign');
+});
 
-Route::middleware('auth')->prefix('admin')->group(function () {
+Route::middleware('admin')->prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('admin/home');
+    });
     Route::get('/gifts', 'GiftController@index');
     Route::post('/gifts', 'GiftController@store');
     Route::delete('/gifts/{id}', 'GiftController@destroy');
     Route::put('/gifts/{id}', 'GiftController@update');
+    Route::post('/gifts/unassign/{id}', 'GiftController@unassign');
 });

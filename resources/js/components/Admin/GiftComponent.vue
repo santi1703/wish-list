@@ -1,31 +1,32 @@
 <template>
     <div class="col-md-8 mt-2">
         <div class="card">
-            <div class="card-header">Lista de regalos</div>
+            <div class="card-header"><h1>Lista de regalos</h1></div>
 
             <div class="card-body">
 
                 <form @submit.prevent="editItem(gift)" v-if="editing">
-                    <input type="text" class="form-control" placeholder="Nombre" v-model="gift.name">
-                    <textarea rows="3" class="form-control" placeholder="Descripcion"
-                              v-model="gift.description"></textarea>
-                    <a class="btn btn-secondary" @click="cancelEditForm" :disabled="disableButtons" type="button">Cancelar</a>
-                    <button class="btn btn-warning" type="submit" :disabled="disableButtons || invalidItem()">Guardar
+                    <input type="text" class="form-control mt-1" placeholder="Nombre" v-model="gift.name">
+                    <textarea rows="3" class="form-control mt-1" placeholder="Descripcion"
+                              v-model="gift.description" style="resize: none;"></textarea>
+                    <a class="btn btn-secondary mt-1" @click="cancelEditForm" :disabled="disableButtons" type="button">Cancelar</a>
+                    <button class="btn btn-warning mt-1" type="submit" :disabled="disableButtons || invalidItem()">Guardar
                     </button>
                 </form>
 
                 <form @submit.prevent="addItem" v-else>
-                    <input type="text" class="form-control" placeholder="Nombre" v-model="gift.name">
-                    <textarea rows="3" class="form-control" placeholder="Descripcion"
-                              v-model="gift.description"></textarea>
-                    <button class="btn btn-primary" type="submit" :disabled="disableButtons || invalidItem()">Agregar
+                    <input type="text" class="form-control mt-1" placeholder="Nombre" v-model="gift.name">
+                    <textarea rows="3" class="form-control mt-1" placeholder="Descripcion"
+                              v-model="gift.description" style="resize: none;"></textarea>
+                    <button class="btn btn-primary mt-1" type="submit" :disabled="disableButtons || invalidItem()">Agregar
                     </button>
                 </form>
 
                 <ul class="list-group">
                     <li class="list-group-item"
                         v-for="(item, index) in gifts" :key="index">
-                        <p data-toggle="tooltip" :title="item.description">{{ item.name }}</p>
+                        <h3>{{ item.name }}</h3>
+                        <p>{{ item.description }}</p>
                         <button class="btn btn-warning btn-sm float-right mr-1"
                                 data-toggle="tooltip"
                                 :title="getTooltip(item)"
@@ -37,6 +38,12 @@
                                 :title="getTooltip(item)"
                                 :disabled="item.user_id || disableButtons"
                                 @click="deleteItem(item, index)">Borrar
+                        </button>
+                        <button class="btn btn-primary btn-sm float-right mr-1"
+                                data-toggle="tooltip"
+                                :title="getTooltip(item)"
+                                :disabled="!item.user_id || disableButtons"
+                                @click="unassignItem(item, index)">Desasignar
                         </button>
                     </li>
                 </ul>
@@ -58,7 +65,7 @@
             }
         },
         created() {
-            axios.get(this.baseurl + '/admin/gifts')
+            axios.get(this.baseurl + '/gifts')
                 .then(res => {
                     this.gifts = res.data;
                 })
@@ -70,7 +77,7 @@
                     name: this.gift.name,
                     description: this.gift.description
                 };
-                axios.post(this.baseurl + '/admin/gifts', params)
+                axios.post(this.baseurl + '/gifts', params)
                     .then(res => {
                         this.disableButtons = false;
                         this.gifts.push(res.data);
@@ -81,7 +88,7 @@
             editItem(item, index) {
                 this.disableButtons = true;
                 const params = {name: item.name, description: item.description};
-                axios.put(this.baseurl + `/admin/gifts/${item.id}`, params)
+                axios.put(this.baseurl + `/gifts/${item.id}`, params)
                     .then(res => {
                         this.disableButtons = false;
                         const index = this.gifts.findIndex(item => item.id === res.data.id);
@@ -109,7 +116,7 @@
             deleteItem(item, index) {
                 if (confirm('Estas seguro de borrar el regalo ' + item.name + '?')) {
                     this.disableButtons = true;
-                    axios.delete(this.baseurl + `/admin/gifts/${item.id}`)
+                    axios.delete(this.baseurl + `/gifts/${item.id}`)
                         .then(() => {
                             this.disableButtons = false;
                             this.gifts.splice(index, 1);
@@ -125,7 +132,17 @@
             },
             invalidItem() {
                 return this.gift.name.length == 0 || this.gift.description.length == 0;
-            }
+            },
+            unassignItem(item, index) {
+                if (confirm('Estas seguro de desasignar el regalo ' + item.name + '?')) {
+                    this.disableButtons = true;
+                    axios.post(this.baseurl + `/gifts/unassign/${item.id}`)
+                        .then(res => {
+                            this.disableButtons = false;
+                            this.gifts[index] = res.data;
+                        });
+                }
+            },
         }
     }
 </script>

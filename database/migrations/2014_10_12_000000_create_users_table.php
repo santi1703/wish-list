@@ -15,8 +15,8 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -37,16 +37,18 @@ class CreateUsersTable extends Migration
             ]
         );
 
-        DB::table('users')->insert(
-            [
-                'firstname' => 'usuario 1',
-                'lastname' => 'usuario 1',
-                'email' => 'prueba@gmail.com',
-                'email_verified_at' => now(),
-                'password' => bcrypt('123456'),
-                'role' => 1
-            ]
-        );
+        for($i = 1; $i < 10; $i++) {
+            DB::table('users')->insert(
+                [
+                    'firstname' => "usuario $i",
+                    'lastname' => "usuario $i",
+                    'email' => "usuario$i@gmail.com",
+                    'email_verified_at' => now(),
+                    'password' => bcrypt('123456'),
+                    'role' => 1
+                ]
+            );
+        }
 
     }
 

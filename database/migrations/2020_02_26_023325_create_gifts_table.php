@@ -21,6 +21,41 @@ class CreateGiftsTable extends Migration
             $table->string('description');
             $table->timestamps();
         });
+
+        DB::table('gifts')->insert(
+            [
+                'name' => "Mesa ratona",
+                'description' => "Una mesa ratona bonita para el living",
+            ]
+        );
+
+        DB::table('gifts')->insert(
+            [
+                'name' => "Heladera",
+                'description' => "Una heladera para la cocina",
+            ]
+        );
+
+        DB::table('gifts')->insert(
+            [
+                'name' => "Sommier de dos plazas",
+                'description' => "Un sommier de dos plazas para dormir piola",
+            ]
+        );
+
+        DB::table('gifts')->insert(
+            [
+                'name' => "Juego de sabanas de dos plazas",
+                'description' => "Un juego de sabanas para el sommier",
+            ]
+        );
+
+        DB::table('gifts')->insert(
+            [
+                'name' => "Juego de 24 cubiertos",
+                'description' => "Unos buenos cubiertos para hacer comida rica",
+            ]
+        );
     }
 
     /**

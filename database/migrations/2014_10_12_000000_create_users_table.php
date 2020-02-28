@@ -28,8 +28,8 @@ class CreateUsersTable extends Migration
         // Insert some stuff
         DB::table('users')->insert(
             [
-                'firstname' => 'admin',
-                'lastname' => 'admin',
+                'first_name' => 'admin',
+                'last_name' => 'admin',
                 'email' => 'santi1703@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('123456'),
@@ -40,8 +40,8 @@ class CreateUsersTable extends Migration
         for($i = 1; $i < 10; $i++) {
             DB::table('users')->insert(
                 [
-                    'firstname' => "usuario $i",
-                    'lastname' => "usuario $i",
+                    'first_name' => "usuario $i",
+                    'last_name' => "usuario $i",
                     'email' => "usuario$i@gmail.com",
                     'email_verified_at' => now(),
                     'password' => bcrypt('123456'),
